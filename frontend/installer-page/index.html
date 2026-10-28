@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WebKit Autoloader Installer v[[VERSION_PLACEHOLDER]] by PLK (built [[BUILD_TIME_PLACEHOLDER]])</title>
+  <title>Tardis WebKit Autoloader Installer v[[VERSION_PLACEHOLDER]] by PLK (built [[BUILD_TIME_PLACEHOLDER]])</title>
   <style>
     * {
       margin: 0;
@@ -367,14 +367,40 @@
       }
       #cacheCorruptOverlay .card { margin: 1rem; }
     }
+
+    /* TARDIS visual identity: indigo mark, midnight canvas, calm high-contrast UI. */
+    body {
+      background: #090a18;
+      background: -webkit-radial-gradient(ellipse at 50% 5%, #191943 0%, #0d0e22 48%, #080914 100%);
+      background: radial-gradient(ellipse at 50% 5%, #191943 0%, #0d0e22 48%, #080914 100%);
+      color: #f5f5ff;
+    }
+    main { max-width: 48rem; }
+    .logo { width: 4rem; height: 4rem; margin-bottom: 1.15rem; }
+    h1 { font-size: 2.1rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+    p { color: #a8abc7; }
+    #status { color: #aaa6ff; }
+    #progress { background: rgba(7, 8, 22, 0.78); border-color: rgba(156, 153, 255, 0.22); }
+    #progressBar { background: #5148ff; background: -webkit-linear-gradient(90deg, #3025d9 0%, #817bff 100%); }
+    #logContainer { background: rgba(7, 8, 22, 0.78); border-color: rgba(156, 153, 255, 0.22); border-radius: 12px; }
+    .choice-card { background: rgba(16, 17, 42, 0.94); border-color: rgba(156, 153, 255, 0.2); }
+    .choice-card.selected { border-color: #817bff; background-color: rgba(81, 72, 255, 0.12); }
+    .choice-card:focus { border-color: #aaa6ff; background-color: #24234b; box-shadow: 0 0 0 3px rgba(129, 123, 255, 0.32); }
+    .choice-title { color: #aaa6ff; }
+    .choice-fw { color: #d1ceff; background: rgba(129, 123, 255, 0.12); border-color: rgba(129, 123, 255, 0.3); }
+    #cacheCorruptOverlay .card { background: #14152f; border-color: rgba(156, 153, 255, 0.24); }
+    #cacheCorruptOverlay .btn.primary { background: #3025d9; background: -webkit-linear-gradient(90deg, #3025d9 0%, #665dff 100%); }
+    #footer { color: #8586a5; }
+    #footer a { color: #aaa6ff; }
+    @media (max-width: 560px) { h1 { font-size: 1.65rem; } }
   </style>
 
 </head>
 
 <body>
   <main>
-    <img class="logo" src="/logo.svg" alt="WebKit Autoloader" />
-    <h1>WebKit Autoloader Installer</h1>
+    <img class="logo" src="/logo.svg" alt="TARDIS" />
+    <h1>Tardis WebKit Autoloader</h1>
     <p id="status">Caching content...</p>
     <p id="detail">Please wait a moment. Do not close this page yet!</p>
 
@@ -401,7 +427,7 @@
 
   </main>
 
-  <footer id="footer">WebKit Autoloader Installer v[[VERSION_PLACEHOLDER]] by PLK (built [[BUILD_TIME_PLACEHOLDER]])<br />This project is free and open source: github.com/itsPLK/ps5-webkit-autoloader</footer>
+  <footer id="footer">Tardis WebKit Autoloader Installer v[[VERSION_PLACEHOLDER]] by PLK (built [[BUILD_TIME_PLACEHOLDER]])<br />This project is free and open source: github.com/itsPLK/ps5-webkit-autoloader</footer>
 
   <div id="cacheCorruptOverlay" role="dialog" aria-modal="true" aria-labelledby="repairTitle" aria-describedby="repairMessage" hidden>
     <div class="card">
@@ -614,7 +640,7 @@
         status.textContent = 'Installed successfully';
         status.className = 'success';
         progress.className = 'success';
-        detail.textContent = 'Reboot, then open WebKit Autoloader from the homescreen. You can close this page.';
+        detail.textContent = 'Reboot, then open Tardis WebKit Autoloader from the homescreen. You can close this page.';
       })
       .catch(function (error) { fail(error.message); });
   }

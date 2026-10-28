@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Generate all derived icon assets from assets/icon.svg at build time.
 
-The master SVG is a full-bleed sphere with no padding and no background, so
-every generated asset gets a dark background and ~10% padding added.
+The master SVG is the white TARDIS symbol. Each generated icon gets the primary
+indigo tile and consistent padding.
 
 Outputs:
   assets/icon0.png                        PS5 homescreen icon (512x512)
@@ -25,16 +25,13 @@ ICON0 = os.path.join(ROOT, "assets", "icon0.png")
 ICON_ICO = os.path.join(ROOT, "assets", "icon.ico")
 
 VIEWBOX = 1024
-ART_RADIUS = 510.04  # outermost extent of the master art (ring reaches y=1022.08)
+ART_RADIUS = 476  # outermost extent of the paired pillars around the 512px centre
 PAD_FRACTION = 0.1
 SCALE = (1.0 - 2.0 * PAD_FRACTION) * (VIEWBOX / 2.0) / ART_RADIUS
 TRANSLATE = VIEWBOX * (1.0 - SCALE) / 2.0
 ICO_SIZES = [16, 24, 32, 48, 64, 128, 256]
 
-BG_GRADIENT = """    <radialGradient id="wkalBg" cx="50%" cy="50%" r="75%">
-      <stop offset="0%" stop-color="#0e182b"/>
-      <stop offset="100%" stop-color="#060a13"/>
-    </radialGradient>"""
+BG_COLOR = "#0A00B0"
 
 
 def build_wrapper_svg(master_src):
@@ -48,17 +45,16 @@ def build_wrapper_svg(master_src):
         '<svg xmlns="http://www.w3.org/2000/svg" '
         'xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 {vb} {vb}">\n'
         "  <defs>\n"
-        "{bg}\n"
         "{defs}\n"
         "  </defs>\n"
-        '  <rect width="{vb}" height="{vb}" fill="url(#wkalBg)"/>\n'
+        '  <rect width="{vb}" height="{vb}" fill="{bg}"/>\n'
         '  <g transform="translate({t} {t}) scale({s})">\n'
         "{art}\n"
         "  </g>\n"
         "</svg>\n"
     ).format(
         vb=VIEWBOX,
-        bg=BG_GRADIENT,
+        bg=BG_COLOR,
         defs=defs.group(1).strip(),
         art=art.group(1).strip(),
         t=round(TRANSLATE, 3),

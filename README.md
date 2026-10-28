@@ -1,7 +1,7 @@
 <p align="center">
- <img src="./assets/icon.svg" width="128" />
+ <img src="./brand/logo/tardis-symbol.svg" width="96" alt="TARDIS" />
 </p>
-<h1 align="center">PS5 WebKit Autoloader</h1>
+<h1 align="center">Tardis WebKit Autoloader</h1>
 &nbsp;
 <p align="center">Automatically loads the WebKit exploit and your elf payloads.<br>Supports firmwares <b>7.00&ndash;13.60</b>.</p>
 
@@ -12,7 +12,7 @@
     <a href="https://github.com/itsPLK/ps5-lua-autoloader">Lua</a>
 </p>
 
-## Why WebKit Autoloader?
+## Why Tardis WebKit Autoloader?
 
 WebKit exploits are usually loaded by pointing your PS5's DNS at some server hosted by someone on the internet. That means you're putting your trust in whoever runs that server — and if it goes down, changes, or disappears, your setup breaks.
 
@@ -31,8 +31,8 @@ There are two ways to set up the autoloader, depending on whether you're already
 
 1. Download `webkit-autoloader-installer_vX.Y.Z.elf` from the [Releases](https://github.com/itsPLK/ps5-webkit-autoloader/releases) page.
 2. Send it to your PS5 with `elfldr`, or launch it from Payload Manager.
-3. The installer opens the browser to cache the autoloader page (choose Poops or Relapse if prompted), creates the **WebKit Autoloader** app on the homescreen, and exits.
-4. **Reboot once**, then launch **WebKit Autoloader** from the homescreen.
+3. The installer opens the browser to cache the autoloader page (choose Poops or Relapse if prompted), creates the **Tardis WebKit Autoloader** app on the homescreen, and exits.
+4. **Reboot once**, then launch **Tardis WebKit Autoloader** from the homescreen.
 
 ### Not jailbroken yet
 
@@ -40,8 +40,20 @@ If you aren't jailbroken yet, you'll need to host the exploit locally on your PC
 
 1. Download `webkit-autoloader-host.py` (or the `.exe`) from the [Releases](https://github.com/itsPLK/ps5-webkit-autoloader/releases) and run it on a PC on your network.
 2. On your PS5, set your network's DNS server to your PC's IP address.
-3. Open the **User's Guide** from Settings to run the installer, which adds the **WebKit Autoloader** app to your homescreen.
-4. **Reboot once**, then launch **WebKit Autoloader** from the homescreen.
+3. Open the **User's Guide** from Settings to run the installer, which adds the **Tardis WebKit Autoloader** app to your homescreen.
+4. **Reboot once**, then launch **Tardis WebKit Autoloader** from the homescreen.
+
+On macOS, after building the host, double-click [Start Tardis Host.command](<Start Tardis Host.command>).
+On Windows, double-click [Start Tardis Host.bat](<Start Tardis Host.bat>); it
+requests administrator privileges and runs the PowerShell launcher. Both launchers
+start the generated host and print the IP to enter as the PS5's Primary DNS.
+Keep the host window open during setup. You still need to set DNS and open the
+User's Guide on the console.
+
+To build a standalone Windows executable from the generated host, run
+[Build Tardis Host EXE.ps1](<Build Tardis Host EXE.ps1>) on Windows. It packages
+the current host with the Tardis icon and requests administrator permission when
+the executable starts.
 
 ## How to Use
 
@@ -73,6 +85,10 @@ For a fixed, automated payload chain, you can configure payloads manually:
 > **Note:** When an `autoload.txt` config is found, Payload Manager is **not** launched automatically. If you also want Payload Manager available, place `pldmgr.elf` in your `ps5_autoloader` directory and add it to `autoload.txt`.
 
 ## Additional Info
+
+### Tardis visual identity
+
+The autoloader uses the Keystone paired-pillar identity. See the [brandbook](output/pdf/tardis-visual-identity-brandbook.pdf), [asset notes](brand/README.md), and vector masters under `brand/logo/`; ready-to-use screen and app-icon files are under `brand/exports/`.
 
 <Details>
 <Summary><i>How to update the autoloader?</i></Summary>

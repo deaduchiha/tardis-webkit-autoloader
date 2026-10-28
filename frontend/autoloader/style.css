@@ -1,3 +1,4 @@
+/* Tardis identity: midnight canvas, electric indigo, and the paired T mark. */
 * {
   margin: 0;
   padding: 0;
@@ -7,37 +8,29 @@
 
 html,
 body {
+  width: 100%;
   height: 100%;
 }
 
 body {
+  --brand: #0A00B0;
+  --brand-bright: #A6A2FF;
+  --ink: #f5f5ff;
+  --muted: #9293b5;
+  --line: rgba(156, 153, 255, 0.18);
   font-family: -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background: #0f172a;
-  background: -webkit-linear-gradient(180deg, #0f172a 0%, #0b1220 100%);
-  color: #e2e8f0;
+  color: var(--ink);
+  background: #090a18;
+  background: -webkit-radial-gradient(ellipse at 50% 5%, #191943 0%, #0d0e22 45%, #080914 100%);
+  background: radial-gradient(ellipse at 50% 5%, #191943 0%, #0d0e22 45%, #080914 100%);
   min-height: 100%;
   overflow: hidden;
 }
 
-#footer {
-  position: fixed;
-  bottom: 12px;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-  transform: translateX(-50%);
-  font-size: 0.75rem;
-  color: #4b5563;
-  line-height: 1.5;
-  text-align: center;
-  z-index: 20;
-}
-
-
-
-/* Loader UI: centered */
 #loader {
   position: relative;
-  z-index: 10;
+  z-index: 1;
+  width: 100%;
   height: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -52,60 +45,117 @@ body {
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
-  background: #0f172a;
-  background: -webkit-linear-gradient(180deg, #0f172a 0%, #0b1220 100%);
+  padding: 30px 4vw 76px;
 }
 
+#brandHeader {
+  width: 82%;
+  max-width: 1220px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  margin: 0 auto 20px;
+}
+
+#brandMark {
+  display: block;
+  width: 27px;
+  height: 41px;
+  margin-right: 13px;
+  color: var(--brand-bright);
+  -webkit-filter: drop-shadow(0 0 14px rgba(81, 72, 255, 0.42));
+  filter: drop-shadow(0 0 14px rgba(81, 72, 255, 0.42));
+  -webkit-flex-shrink: 0;
+  flex-shrink: 0;
+}
+
+#brandText { min-width: 0; }
+
+#brandName {
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+}
+
+#brandDescriptor {
+  margin-top: 5px;
+  color: #a5a4d0;
+  font-size: 0.68rem;
+  line-height: 1.3;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+#logHeading {
+  width: 82%;
+  max-width: 1220px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  margin: 0 auto 9px;
+  color: #b9b8d9;
+  font-size: 0.7rem;
+  line-height: 1.4;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+#logHeading span:last-child { color: #767694; }
 
 #logWrapper {
   width: 82%;
-  height: 72%;
+  height: 61%;
   max-width: 1220px;
-  background: #05070d;
-  border: 1px solid #1e3a5f;
-  border-radius: 10px;
+  background: rgba(7, 8, 22, 0.78);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.025);
   overflow-y: auto;
   font-family: "SFMono-Regular", Menlo, Monaco, "Cascadia Mono", monospace;
-  font-size: 1.05rem;
-  line-height: 1.6;
-  padding: 1rem 1.25rem;
+  font-size: 1rem;
+  line-height: 1.65;
+  padding: 1.1rem 1.25rem;
 }
 
 #console {
-  color: #94a3b8;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  padding: 0;
+  background: transparent;
+  color: #a8abc7;
+  font: inherit;
+  white-space: normal;
   overflow-wrap: break-word;
   word-break: break-word;
 }
 
-#console .log-line {
-  white-space: pre-wrap;
-  margin-bottom: 0.25rem;
-}
-
-#console .log-info, #console .log-setup, #console .log-star, #console .log-log, #console .log-cyan {
-  color: #94a3b8;
-}
-
-#console .log-success, #console .log-plus {
-  color: #7df966;
-}
-
-#console .log-warn {
-  color: #fbbf24;
-}
-
-#console .log-error, #console .log-minus {
-  color: #f87171;
-}
+#console .log-line { white-space: pre-wrap; margin-bottom: 0.25rem; }
+#console .log-info, #console .log-setup, #console .log-star, #console .log-log, #console .log-cyan { color: #a8abc7; }
+#console .log-success, #console .log-plus { color: #88e6bc; }
+#console .log-warn { color: #f3c977; }
+#console .log-error, #console .log-minus { color: #ff858e; }
 
 #progressContainer {
   position: relative;
   width: 82%;
   max-width: 1220px;
-  height: 3rem;
-  margin-top: 1.75rem;
-  background: #1b2436;
-  border: 1px solid #2c3e5a;
+  height: 48px;
+  margin-top: 16px;
+  background: rgba(7, 8, 22, 0.72);
+  border: 1px solid var(--line);
   border-radius: 10px;
   overflow: hidden;
 }
@@ -116,8 +166,9 @@ body {
   left: 0;
   height: 100%;
   width: 0%;
-  background: #38bdf8;
-  background: -webkit-linear-gradient(90deg, #2563eb 0%, #38bdf8 100%);
+  background: #5148ff;
+  background: -webkit-linear-gradient(90deg, #3025d9 0%, #817bff 100%);
+  background: linear-gradient(90deg, #3025d9 0%, #817bff 100%);
   -webkit-transition: width 0.5s ease-in-out;
   transition: width 0.5s ease-in-out;
 }
@@ -138,32 +189,48 @@ body {
   -webkit-justify-content: center;
   justify-content: center;
   color: #fff;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 600;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
   z-index: 1;
   pointer-events: none;
 }
 
-/* Reuse the standalone runner's console inside the original log panel. */
-#console {
-  width: 100%;
-  height: auto;
-  overflow: visible;
-  padding: 0;
-  background: transparent;
-  font: inherit;
-  white-space: normal;
-}
 #logWrapper, #progressContainer { -webkit-flex-shrink: 0; flex-shrink: 0; }
-#progressContainer[data-state="error"] #progressBar { background: #b91c1c; }
-#progressContainer[data-state="done"] #progressBar { background: #15803d; }
-#footer { width: 92%; }
-#footer a { color: inherit; text-decoration: none; }
+#progressContainer[data-state="error"] #progressBar { background: #c93c5a; }
+#progressContainer[data-state="done"] #progressBar { background: #258665; }
+
+#footer {
+  position: fixed;
+  bottom: 14px;
+  left: 50%;
+  width: 92%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  color: #777895;
+  font-size: 0.68rem;
+  line-height: 1.6;
+  text-align: center;
+  z-index: 20;
+}
+
+#footer a { color: #a6a3ff; text-decoration: none; }
+#footer a:focus, #footer a:hover { color: #d0ceff; text-decoration: underline; }
+
 @media (max-width: 600px) {
-  #logWrapper, #progressContainer { width: 92%; }
-  #logWrapper { height: 65%; font-size: 0.85rem; padding: 0.75rem; }
-  #progressContainer { margin-top: 1rem; }
-  #progressLabel { font-size: 0.85rem; padding: 0 0.5rem; text-align: center; }
-  #footer { font-size: 0.65rem; }
+  #loader { padding: 22px 4vw 74px; }
+  #brandHeader, #logHeading, #logWrapper, #progressContainer { width: 92%; }
+  #brandHeader { margin-bottom: 18px; }
+  #brandMark { width: 23px; height: 35px; margin-right: 10px; }
+  #brandName { font-size: 0.85rem; }
+  #brandDescriptor { font-size: 0.58rem; }
+  #logWrapper { height: 62%; font-size: 0.82rem; padding: 0.8rem; border-radius: 11px; }
+  #logHeading { font-size: 0.6rem; }
+  #progressContainer { height: 44px; margin-top: 13px; }
+  #progressLabel { font-size: 0.78rem; padding: 0 0.5rem; text-align: center; }
+  #footer { font-size: 0.61rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #progressBar { -webkit-transition: none; transition: none; }
 }

@@ -1,9 +1,21 @@
 <!doctype html>
 <html lang="en">
 <meta charset="utf-8">
-<title>WebKit Autoloader v[[VERSION_PLACEHOLDER]] by PLK (built [[BUILD_TIME_PLACEHOLDER]])</title>
-<body style="background:#111;color:#eee;font:24px sans-serif;margin:10%">
+<title>Tardis WebKit Autoloader v[[VERSION_PLACEHOLDER]] by PLK (built [[BUILD_TIME_PLACEHOLDER]])</title>
+<style>
+  * { box-sizing: border-box; }
+  body { background: #090a18; color: #f5f5ff; font: 20px -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; }
+  main { padding: 2rem; }
+  img { width: 58px; height: 58px; margin-bottom: 1rem; }
+  h1 { color: #fff; font-size: 1.1rem; letter-spacing: .14em; text-transform: uppercase; }
+  p { color: #aaa6ff; }
+</style>
+<body>
+<main>
+<img src="/logo.svg" alt="TARDIS" />
+<h1>Tardis WebKit Autoloader</h1>
 <p id="status">Loading...</p>
+</main>
 <script>
 (function () {
   // Both chain pages are cached, so this pointer only has to pick one. The choice

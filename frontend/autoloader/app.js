@@ -14,6 +14,29 @@
   }
 
   var loader = element('main', 'loader', document.body);
+  var brand = element('header', 'brandHeader', loader);
+  var mark = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  mark.setAttribute('id', 'brandMark');
+  mark.setAttribute('viewBox', '0 0 256 256');
+  mark.setAttribute('role', 'img');
+  mark.setAttribute('aria-label', 'Tardis');
+  mark.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+  var leftMark = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  leftMark.setAttribute('d', 'M52 26.22 120 8v238l-68-18.22V76L24 83.5v-34L52 42z');
+  leftMark.setAttribute('fill', 'currentColor');
+  var rightMark = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  rightMark.setAttribute('d', 'M204 26.22 136 8v238l68-18.22V76l28 7.5v-34L204 42z');
+  rightMark.setAttribute('fill', 'currentColor');
+  mark.appendChild(leftMark);
+  mark.appendChild(rightMark);
+  brand.appendChild(mark);
+  var brandText = element('div', 'brandText', brand);
+  element('div', 'brandName', brandText, 'TARDIS');
+  element('div', 'brandDescriptor', brandText, 'WebKit Autoloader');
+
+  var heading = element('div', 'logHeading', loader);
+  element('span', 'logHeadingTitle', heading, 'System output');
+  element('span', 'logHeadingMode', heading, 'Live session');
   var wrapper = element('div', 'logWrapper', loader);
   wrapper.appendChild(output);
   var progress = element('div', 'progressContainer', loader);
@@ -24,12 +47,12 @@
   var label = element('div', 'progressLabel', progress);
   var config = window.WKAL_PAGE || {};
   if (config.version) {
-    document.title = 'WebKit Autoloader v' + config.version + ' by PLK' +
+    document.title = 'Tardis WebKit Autoloader v' + config.version +
       (config.buildTime ? ' (built ' + config.buildTime + ')' : '');
   }
   var footer = element('div', 'footer', document.body);
-  element('div', 'buildInfo', footer, 'WebKit Autoloader' +
-    (config.version ? ' v' + config.version : '') + ' by PLK' +
+  element('div', 'buildInfo', footer, 'Tardis WebKit Autoloader' +
+    (config.version ? ' v' + config.version : '') +
     (config.buildTime ? ' (built ' + config.buildTime + ')' : ''));
   var source = element('div', 'sourceInfo', footer, 'This project is free and open source: ');
   var link = element('a', 'sourceLink', source, 'github.com/itsPLK/ps5-webkit-autoloader');

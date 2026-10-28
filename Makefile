@@ -115,11 +115,11 @@ $(ELF): registry icons $(SRCS) $(wildcard include/*.h) $(INSTALLER_COMMON_HEADER
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $(SRCS) include/file_registry.c $(LIBS)
 	$(STRIP) $@
 
-# The setup host embeds the installer ELF. It packages both chains (Relapse as
-# default index.html, Poops as poops.html) so firmwares where Relapse is
-# unsupported (9.05) are automatically routed to Poops.
+# The setup host embeds the installer ELF. It shows a Tardis-branded chain
+# chooser at index.html and packages both supported chain pages behind it.
 HOST_RELAPSE := build/host/relapse.html
 HOST_POOPS := build/host/poops.html
+HOST_CHOOSER := build/host/index.html
 
 host: $(HOST_PAYLOAD) payload-deps assets/icon.ico
 	@mkdir -p build/host
@@ -130,10 +130,12 @@ host: $(HOST_PAYLOAD) payload-deps assets/icon.ico
 	$(BUILDER) $(CURDIR)/payloads/elfldr-check.js payloads/poops.js $(CURDIR)/payloads/autoload.js::$(HOST_PAYLOAD_VIRTUAL) \
 	    --title "$(BUILD_TITLE)" $(PAGE_FLAGS) \
 	    --embed $(HOST_PAYLOAD_VIRTUAL)=$(HOST_PAYLOAD) -o $(CURDIR)/$(HOST_POOPS)
+	cp frontend/host-chooser/index.html $(HOST_CHOOSER)
 	$(PYTHON) $(LOADER)/tools/build_host.py \
-	    --page index.html=$(HOST_RELAPSE) \
+	    --page index.html=$(HOST_CHOOSER) \
+	    --page relapse.html=$(HOST_RELAPSE) \
 	    --page poops.html=$(HOST_POOPS) \
-	    --version $(BUILD_VERSION) --name "PS5 WEBKIT AUTOLOADER" --output webkit-autoloader-host.py
+	    --version $(BUILD_VERSION) --name "TARDIS WEBKIT AUTOLOADER" --output webkit-autoloader-host.py
 
 dev: page
 	$(PYTHON) -m http.server 8123 --bind 127.0.0.1 --directory build/autoloader
