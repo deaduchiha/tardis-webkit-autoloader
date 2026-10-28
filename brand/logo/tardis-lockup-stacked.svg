@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 334" role="img" aria-labelledby="title">
+  <title id="title">TARDIS stacked signature</title>
+  <path fill="#0A00B0" d="M52 26.22 120 8v238l-68-18.22V76L24 83.5v-34L52 42zm152 0L136 8v238l68-18.22V76l28 7.5v-34L204 42z"/>
+  <g fill="#0A00B0" fill-rule="evenodd" transform="translate(8 270)">
+    <path d="M0 0h36v8H22v40h-8V8H0z"/>
+    <path d="m41 48 10-48h20l10 48h-9l-2.4-12H52.4L50 48zm13-20h14L64.4 8h-6.8z"/>
+    <path d="M86 0h24c10 0 15 5 15 15v7c0 7-3 11-9 14l12 12h-12l-12-12H95v12h-9zm9 8v21h14c5 0 7-2 7-7v-7c0-5-2-7-7-7z"/>
+    <path d="M132 0h17c15 0 23 8 23 24s-8 24-23 24h-17zm9 8v32h8c9 0 14-5 14-16s-5-16-14-16z"/>
+    <path d="M181 0h9v48h-9z"/>
+  </g>
+  <path d="M244 278H224c-9 0-12 4-12 10s3 9 10 11l12 4c7 2 10 5 10 11s-4 10-12 10h-24" fill="none" stroke="#0A00B0" stroke-width="8" stroke-linecap="butt" stroke-linejoin="round"/>
+</svg>

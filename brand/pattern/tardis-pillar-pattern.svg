@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <title>TARDIS paired pillar repeat pattern</title>
+  <g fill="#0A00B0" opacity="0.12">
+    <path d="M28 18 48 13v74l-20-5V39l-8 2v-10l8-1zm44 0-20-5v74l20-5V39l8 2V31l-8-1z"/>
+    <path d="M156 18 176 13v74l-20-5V39l-8 2v-10l8-1zm44 0-20-5v74l20-5V39l8 2V31l-8-1z"/>
+    <path d="M28 146 48 141v74l-20-5v-43l-8 2v-10l8-1zm44 0-20-5v74l20-5v-43l8 2v-10l-8-1z"/>
+    <path d="M156 146 176 141v74l-20-5v-43l-8 2v-10l8-1zm44 0-20-5v74l20-5v-43l8 2v-10l-8-1z"/>
+  </g>
+</svg>
