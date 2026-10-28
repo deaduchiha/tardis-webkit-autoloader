@@ -120,8 +120,9 @@ $(ELF): registry icons $(SRCS) $(wildcard include/*.h) $(INSTALLER_COMMON_HEADER
 HOST_RELAPSE := build/host/relapse.html
 HOST_POOPS := build/host/poops.html
 HOST_CHOOSER := build/host/index.html
+HOST_SOURCE := build/host/host.py
 
-host: $(HOST_PAYLOAD) payload-deps assets/icon.ico
+host: $(HOST_PAYLOAD) payload-deps assets/icon.ico $(HOST_SOURCE)
 	@mkdir -p build/host
 	$(PYTHON) tools/gen_version.py --page-config $(PAGE_CONFIG)
 	$(BUILDER) $(CURDIR)/payloads/elfldr-check.js payloads/relapse.js $(CURDIR)/payloads/autoload.js::$(HOST_PAYLOAD_VIRTUAL) \
@@ -132,10 +133,14 @@ host: $(HOST_PAYLOAD) payload-deps assets/icon.ico
 	    --embed $(HOST_PAYLOAD_VIRTUAL)=$(HOST_PAYLOAD) -o $(CURDIR)/$(HOST_POOPS)
 	cp frontend/host-chooser/index.html $(HOST_CHOOSER)
 	$(PYTHON) $(LOADER)/tools/build_host.py \
+	    --input $(CURDIR)/$(HOST_SOURCE) \
 	    --page index.html=$(HOST_CHOOSER) \
 	    --page relapse.html=$(HOST_RELAPSE) \
 	    --page poops.html=$(HOST_POOPS) \
 	    --version $(BUILD_VERSION) --name "TARDIS WEBKIT AUTOLOADER" --output webkit-autoloader-host.py
+
+$(HOST_SOURCE): $(LOADER)/host.py tools/prepare_pc_host.py
+	$(PYTHON) tools/prepare_pc_host.py $< $@
 
 dev: page
 	$(PYTHON) -m http.server 8123 --bind 127.0.0.1 --directory build/autoloader

@@ -10,6 +10,10 @@ It needs only Python's standard library.
 Run the generated script, set the PS5's DNS to your PC's IP, then open Settings →
 User's Guide. The page runs the exploit and installer; reboot after installation.
 On systems requiring elevated privileges for ports 53/443, run the host with sudo.
+The host selects its default-route IPv4 address when it starts and reports other
+local addresses when it detects multiple adapters. The PS5 must be on a network
+that can reach the selected address; restart the host after changing networks,
+or pass `--ip <address>` to select another address on the PC.
 
 For a local HTTP check without DNS or HTTPS:
 

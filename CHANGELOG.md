@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v0.6.3] - 2026-10-28
+
+- Improved Windows host console output, avoiding raw ANSI color codes where the terminal does not support them.
+- Report additional local IPv4 addresses and explain how to select the interface reachable by the PS5.
+
 ## [v0.6.2] - 2026-10-28
 
 - Updated [ps5-unified-autoloader](https://github.com/itsPLK/ps5-unified-autoloader) to v0.1.6
