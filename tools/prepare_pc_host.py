@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Apply Tardis-specific Windows console and network diagnostics to host.py.
+"""Apply Tardis-specific Windows console, network and firewall fixes to host.py.
 
 The remote-loader is a pinned upstream submodule. Keeping these small host
 customizations here makes release builds reproducible without committing local
@@ -61,6 +61,51 @@ IP_DIAGNOSTICS = '''    other_ips = [address for address in list_local_ips() if 
     note("change the PS5 network settings for you.")
 '''
 
+FIREWALL_HELPER = '''def ensure_windows_firewall_rule(name, protocol, port):
+    """Best-effort inbound-allow rule on Windows Defender Firewall.
+
+    A blocked bind raises OSError and is already reported via bind_hint(),
+    but a firewall drop is silent: the socket binds fine, the console looks
+    healthy, and the PS5's packets simply never arrive. No-op on non-Windows.
+    Both the .ps1 launcher and the --uac-admin PyInstaller build already run
+    elevated by the time this runs, which `netsh advfirewall` requires.
+    """
+    if os.name != "nt":
+        return True
+    try:
+        subprocess.run(
+            [
+                "netsh", "advfirewall", "firewall", "add", "rule",
+                f"name={name}", "dir=in", "action=allow",
+                f"protocol={protocol}", f"localport={port}",
+            ],
+            check=True, capture_output=True,
+        )
+        return True
+    except (OSError, subprocess.CalledProcessError):
+        return False
+
+
+'''
+
+FIREWALL_DNS_CALL = '''        if not ensure_windows_firewall_rule(
+            "Tardis WebKit Autoloader (DNS)", "UDP", args.dns_port
+        ):
+            note("Could not add a Windows Firewall rule for this port.")
+            note("If the PS5 never shows up below, allow it manually: Windows")
+            note("Defender Firewall -> Advanced settings -> Inbound Rules ->")
+            note(f"New Rule -> Port -> UDP -> {args.dns_port} -> Allow.")
+'''
+
+FIREWALL_HTTPS_CALL = '''        if not ensure_windows_firewall_rule(
+            "Tardis WebKit Autoloader (HTTPS)", "TCP", args.https_port
+        ):
+            note("Could not add a Windows Firewall rule for this port.")
+            note("If the PS5 never shows up below, allow it manually: Windows")
+            note("Defender Firewall -> Advanced settings -> Inbound Rules ->")
+            note(f"New Rule -> Port -> TCP -> {args.https_port} -> Allow.")
+'''
+
 
 def patch(source: str) -> str:
     if "# TARDIS_WINDOWS_CONSOLE" not in source:
@@ -98,6 +143,24 @@ def patch(source: str) -> str:
         if source.count(anchor) != 1:
             raise ValueError("Could not find the upstream host startup message")
         source = source.replace(anchor, anchor + IP_DIAGNOSTICS, 1)
+
+    if "def ensure_windows_firewall_rule" not in source:
+        anchor = "def validate_ip(value):\n"
+        if source.count(anchor) != 1:
+            raise ValueError("Could not find the upstream IP validation function")
+        source = source.replace(anchor, FIREWALL_HELPER + anchor, 1)
+
+    if "Tardis WebKit Autoloader (DNS)" not in source:
+        anchor = '        good(f"DNS on UDP {args.dns_port}")\n'
+        if source.count(anchor) != 1:
+            raise ValueError("Could not find the upstream DNS startup message")
+        source = source.replace(anchor, anchor + FIREWALL_DNS_CALL, 1)
+
+    if "Tardis WebKit Autoloader (HTTPS)" not in source:
+        anchor = '        good(f"HTTPS on TCP {args.https_port} (self-signed)")\n'
+        if source.count(anchor) != 1:
+            raise ValueError("Could not find the upstream HTTPS startup message")
+        source = source.replace(anchor, anchor + FIREWALL_HTTPS_CALL, 1)
 
     return source
 

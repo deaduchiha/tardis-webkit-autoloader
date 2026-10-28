@@ -13,7 +13,11 @@ On systems requiring elevated privileges for ports 53/443, run the host with sud
 The host selects its default-route IPv4 address when it starts and reports other
 local addresses when it detects multiple adapters. The PS5 must be on a network
 that can reach the selected address; restart the host after changing networks,
-or pass `--ip <address>` to select another address on the PC.
+or pass `--ip <address>` to select another address on the PC. On Windows, it
+also adds inbound-allow rules on Windows Defender Firewall for the DNS and
+HTTPS ports, since a silently blocked port otherwise looks identical to a
+healthy "waiting for the PS5" state; if that fails (e.g. not elevated), it
+prints the exact manual steps to allow the port yourself.
 
 For a local HTTP check without DNS or HTTPS:
 
