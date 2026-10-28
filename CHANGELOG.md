@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v0.6.6] - 2026-10-28
+
+- Fix the host patcher's early return that omitted Windows Firewall setup from generated host files and the Windows executable.
+- Keep Windows Firewall status messages Windows-only and fail the host build if required startup logic is missing.
+
 ## [v0.6.5] - 2026-10-28
 
 - Build the Windows host with an administrator manifest so it can create its firewall rules at startup.
