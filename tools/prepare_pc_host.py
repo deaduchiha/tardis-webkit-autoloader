@@ -78,6 +78,7 @@ FIREWALL_HELPER = '''def ensure_windows_firewall_rule(name, protocol, port):
                 "netsh", "advfirewall", "firewall", "add", "rule",
                 f"name={name}", "dir=in", "action=allow",
                 f"protocol={protocol}", f"localport={port}",
+                "remoteip=localsubnet",
             ],
             check=True, capture_output=True,
         )
@@ -95,6 +96,8 @@ FIREWALL_DNS_CALL = '''        if not ensure_windows_firewall_rule(
             note("If the PS5 never shows up below, allow it manually: Windows")
             note("Defender Firewall -> Advanced settings -> Inbound Rules ->")
             note(f"New Rule -> Port -> UDP -> {args.dns_port} -> Allow.")
+        else:
+            good(f"Windows Firewall allows local-network DNS on UDP {args.dns_port}.")
 '''
 
 FIREWALL_HTTPS_CALL = '''        if not ensure_windows_firewall_rule(
@@ -104,6 +107,8 @@ FIREWALL_HTTPS_CALL = '''        if not ensure_windows_firewall_rule(
             note("If the PS5 never shows up below, allow it manually: Windows")
             note("Defender Firewall -> Advanced settings -> Inbound Rules ->")
             note(f"New Rule -> Port -> TCP -> {args.https_port} -> Allow.")
+        else:
+            good(f"Windows Firewall allows local-network HTTPS on TCP {args.https_port}.")
 '''
 
 

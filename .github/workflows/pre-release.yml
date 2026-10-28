@@ -93,7 +93,7 @@ jobs:
           path: .
 
       - name: Build Windows Executable
-        run: pyinstaller --onefile --noconfirm --icon assets/icon.ico --name webkit-autoloader-host_v${{ needs.build-linux.outputs.full_version }} "webkit-autoloader-host_v${{ needs.build-linux.outputs.full_version }}.py"
+        run: pyinstaller --onefile --noconfirm --uac-admin --icon assets/icon.ico --name webkit-autoloader-host_v${{ needs.build-linux.outputs.full_version }} "webkit-autoloader-host_v${{ needs.build-linux.outputs.full_version }}.py"
 
       - name: Upload Windows Executable Artifact
         uses: actions/upload-artifact@v4

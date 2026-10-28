@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v0.6.5] - 2026-10-28
+
+- Build the Windows host with an administrator manifest so it can create its firewall rules at startup.
+- Restrict the automatic Windows Firewall rules to the local subnet and report when they are active.
+
 ## [v0.6.4] - 2026-10-28
 
 - Windows PC setup host: automatically add Windows Defender Firewall inbound-allow rules for the DNS and HTTPS ports, since a silently blocked port looked identical to a healthy "waiting for the PS5" state and left no error to debug.
